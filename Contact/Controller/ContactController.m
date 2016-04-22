@@ -8,16 +8,17 @@
 
 #import "ContactController.h"
 
-@interface ContactController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ContactController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic,strong) NSArray *contactArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @end
 
 @implementation ContactController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.searchBar.delegate = self;
     self.tableView.estimatedRowHeight = 140;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
@@ -68,6 +69,18 @@
         self.contactArray = [notification object];
         [self.tableView reloadData];
     }
+
+}
+
+#pragma mark - searchBar Delegate
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if([searchText length]!=0) {
+        self.contactArray = [NSMutableArray arrayWithArray:[ContactManager searchObjectsInArray:searchText]];
+    } else {
+        self.contactArray = [NSMutableArray arrayWithArray:[[ContactManager shareInstance] getContacts]];
+    }
+    [self.tableView reloadData];
 
 }
 

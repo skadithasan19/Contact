@@ -63,6 +63,24 @@
 }
 
 /**
+ @return all search result
+ */
+
++ (NSArray *)searchObjectsInArray:(NSString *)searchText {
+    
+    NSArray * tempArray = [[ContactManager shareInstance] getContacts];
+    NSMutableArray *searchResult = [NSMutableArray new];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self CONTAINS[cd] %@", searchText];
+    for (NSDictionary *dict in tempArray) {
+         NSArray *aNames = [[dict allValues] filteredArrayUsingPredicate:predicate];
+        if ([aNames count]) {
+            [searchResult addObject:dict];
+        }
+    }
+    return searchResult;
+}
+
+/**
  @param selectedItem is selected object from the list.
  @searchText is the selected item which been selected from the Object
  */

@@ -44,4 +44,10 @@
 
 + (NSInteger)returnItemCounts:(NSDictionary *)item;
 
+/**
+ @return all search result
+ */
+
++ (NSArray *)searchObjectsInArray:(NSString *)searchText;
+
 @end

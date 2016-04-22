@@ -1,0 +1,17 @@
+//
+//  ContactPrefixHeader.pch
+//  Contact
+//
+//  Created by Md Adit Hasan on 4/21/16.
+//  Copyright © 2016 Md Adit Hasan. All rights reserved.
+//
+
+#ifndef ContactPrefixHeader_pch
+#define ContactPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "ContactManager.h"
+#import "iService.h"
+
+#endif /* ContactPrefixHeader_pch */

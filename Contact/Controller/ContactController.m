@@ -81,10 +81,17 @@
         self.contactArray = [NSMutableArray arrayWithArray:[[ContactManager shareInstance] getContacts]];
     }
     [self.tableView reloadData];
+}
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+        [self.searchBar resignFirstResponder];
 }
 
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+        [self.searchBar resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

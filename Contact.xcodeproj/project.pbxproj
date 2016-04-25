@@ -33,6 +33,7 @@
 		21C742A11CCA9ABF00B47512 /* iService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iService.m; sourceTree = "<group>"; };
 		21C742A31CCA9ABF00B47512 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21C742A41CCA9ABF00B47512 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		21C742AA1CCAD05500B47512 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 				21C7429F1CCA9ABF00B47512 /* ContactManager.m */,
 				21C742A01CCA9ABF00B47512 /* iService.h */,
 				21C742A11CCA9ABF00B47512 /* iService.m */,
+				21C742AA1CCAD05500B47512 /* Constants.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";

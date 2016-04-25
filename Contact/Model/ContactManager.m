@@ -39,7 +39,7 @@
 
 -(void)loadDataFromAPI {
 
-    [iService getJsonResponse:@"http://nsmith.nfshost.com/sf/contacts.json" success:^(NSDictionary *responseDict) {
+    [iService getJsonResponse:API success:^(NSDictionary *responseDict) {
         self.contacts = [responseDict valueForKey:@"contacts"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GetResponse" object:self.contacts];
     }];

@@ -16,4 +16,5 @@
 
 + (void)postRequestWithURL : (NSString *)urlStr jsonDataConvertFrom:(NSDictionary *)postDictionary success : (void (^)(NSDictionary *responseDict))success;
 
++ (void)postRequestWithURL : (NSString *)urlStr urlDataConvertFrom:(NSDictionary *)postDictionary success : (void (^)(NSDictionary *responseDict))success;
 @end

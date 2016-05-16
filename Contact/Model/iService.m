@@ -49,6 +49,7 @@
     request.HTTPMethod = @"POST";
  
     NSError *error = nil;
+    
     //Converting JSON data before posting to URL
     NSData *data = [NSJSONSerialization dataWithJSONObject:postDictionary
                                                options:kNilOptions error:&error];
@@ -72,4 +73,53 @@
     }
     
 }
+
+
++ (void)postRequestWithURL : (NSString *)urlStr urlDataConvertFrom:(NSDictionary *)postDictionary success : (void (^)(NSDictionary *responseDict))success
+{
+    
+    /*comma separated key and value by &*/
+    NSString *(^urlEncode)(id object) = ^(id object){
+        NSString *string = (NSString *)object;
+        return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+    };
+    
+    /* preparing encoding string data*/
+    NSString *(^urlEncodedString)(NSDictionary *) = ^(NSDictionary *dictionary) {
+        NSMutableArray *parts = [NSMutableArray array];
+        for (id key in [dictionary allKeys]) {
+            id value = [dictionary objectForKey: key];
+            NSString *part = [NSString stringWithFormat: @"%@=%@", urlEncode(key), urlEncode(value)];
+            [parts addObject: part];
+        }
+        return [parts componentsJoinedByString: @"&"];
+        
+    };
+
+    
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSURL * url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSString * params =urlEncodedString(postDictionary);
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest
+                                                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                           if(data) {
+                                                               id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                                               success(jsonObject);
+                                                           } else {
+                                                               NSLog(@"Couldn't reach to the Server. Please Try again Later.");
+                                                           }
+                                                       }];
+    [dataTask resume];
+    
+}
+
+
+
 @end
